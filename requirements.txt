@@ -3,3 +3,4 @@ pyrogram==2.0.69
 requests==2.26.0
 asyncio==3.4.3
 moviepy==1.0.3
+tgcrypto==1.2.3  # Add the correct version here
