@@ -18,6 +18,7 @@ def get_dailymotion_token():
         'scope': 'manage_videos'
     }
     response = requests.post(url, data=data)
+    response.raise_for_status()
     return response.json().get('access_token')
 
 # Replace the upload logic
@@ -36,12 +37,14 @@ async def upload_video(client, message):
         # Upload the video
         upload_url = "https://api.dailymotion.com/file/upload"
         upload_response = requests.post(upload_url, headers=headers)
+        upload_response.raise_for_status()
         upload_link = upload_response.json().get('upload_url')
 
         with open(video_path, 'rb') as video_file:
             files = {'file': video_file}
             video_response = requests.post(upload_link, files=files)
-            video_url = video_response.json().get('url')
+            video_response.raise_for_status()
+        video_url = video_response.json().get('url')
 
         # Post the video
         post_url = "https://api.dailymotion.com/me/videos"
@@ -50,7 +53,8 @@ async def upload_video(client, message):
             'title': caption,
             'tags': 'your_tags'
         }
-        requests.post(post_url, headers=headers, data=post_data)
+        post_response = requests.post(post_url, headers=headers, data=post_data)
+        post_response.raise_for_status()
 
         if language == "fa":
             await message.reply("✅ ویدیو با موفقیت در Dailymotion آپلود شد.")
@@ -62,4 +66,3 @@ async def upload_video(client, message):
             await message.reply(f"⚠️ خطا: {e}")
         else:
             await message.reply(f"⚠️ Error: {e}")
-            
