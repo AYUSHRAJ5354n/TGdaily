@@ -1,5 +1,6 @@
 import requests
-from pyrogram import Client, filters  # Ensure you have imported the necessary modules
+from pyrogram import Client, filters
+import asyncio
 
 # Initialize the app object
 app = Client("my_account", api_id=21572824, api_hash="cc88cfb3d1cc2d0c9baea879e0fc62b0", bot_token="7317390308:AAHFIilw1zu5kW1FkYFx70i09PuVAIAU__s")
