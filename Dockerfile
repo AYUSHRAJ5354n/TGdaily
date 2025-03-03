@@ -10,8 +10,14 @@ COPY requirements.txt .
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install ntp for time synchronization
+RUN apt-get update && apt-get install -y ntp
+
 # Copy the rest of the application code into the container at /app
 COPY . .
+
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
 
 # Set environment variables for Telegram and Dailymotion credentials
 ENV TELEGRAM_API_ID=<your-telegram-api-id>
@@ -22,5 +28,5 @@ ENV DAILYMO_PASS=<your-dailymotion-password>
 ENV DAILYMO_API_KEY=<your-dailymotion-api-key>
 ENV DAILYMO_API_SECRET=<your-dailymotion-api-secret>
 
-# Run the application
-CMD ["python", "main.py"]
+# Set the entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
