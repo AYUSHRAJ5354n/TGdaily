@@ -1,10 +1,14 @@
 import requests
+from pyrogram import Client, filters  # Ensure you have imported the necessary modules
+
+# Initialize the app object
+app = Client("my_account", api_id=21572824, api_hash="cc88cfb3d1cc2d0c9baea879e0fc62b0", bot_token="7317390308:AAHFIilw1zu5kW1FkYFx70i09PuVAIAU__s")
 
 # Dailymotion credentials
-DAILYMO_USER = "your_dailymotion_username"
-DAILYMO_PASS = "your_dailymotion_password"
-DAILYMO_API_KEY = "your_dailymotion_api_key"
-DAILYMO_API_SECRET = "your_dailymotion_api_secret"
+DAILYMO_USER = "akabarbabar8@gmail.com"
+DAILYMO_PASS = "AYUSHRA5354N@"
+DAILYMO_API_KEY = "4b8ebba0a67b86ead065"
+DAILYMO_API_SECRET = "df6256d39ab33634919703751e792b9eda135087"
 
 # Function to get Dailymotion access token
 def get_dailymotion_token():
@@ -66,3 +70,6 @@ async def upload_video(client, message):
             await message.reply(f"⚠️ خطا: {e}")
         else:
             await message.reply(f"⚠️ Error: {e}")
+
+# Run the app
+app.run()
